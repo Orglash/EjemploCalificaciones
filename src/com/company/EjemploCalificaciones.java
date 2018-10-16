@@ -6,6 +6,10 @@ import java.util.Scanner;
         //Funcion pedirNumero: recogemos los valores por teclado.
         public static int pedirNumero() {
             Scanner numero = new Scanner(System.in);
+            while(!numero.hasNextInt()){
+                mensajeError();
+                numero = new Scanner(System.in);
+            }
             return numero.nextInt();
         }
         public static int operacion(int numeroAciertos, int numeroErrores, int numeroPreguntas) {
@@ -16,6 +20,9 @@ import java.util.Scanner;
         }
         public static void introduce(String tipoPregunta, String sujeto) {
             System.out.printf("Introduzca cantidad de %s del %s, por favor.\n", tipoPregunta ,sujeto);
+        }
+        public static void mensajeError () {
+            System.out.println("El dato introducido es incorrecto, introduzca un número entero.\n");
         }
 
         public static void main(String[] args) {
