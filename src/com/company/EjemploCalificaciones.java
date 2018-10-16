@@ -4,64 +4,61 @@ import java.util.Scanner;
 
     public class EjemploCalificaciones {
         //Funcion pedirNumero: recogemos los valores por teclado.
-        public static double pedirNumero() {
+        public static int pedirNumero() {
             Scanner numero = new Scanner(System.in);
-            System.out.println("Introduzca número");
-            return numero.nextDouble();
+            return numero.nextInt();
         }
-        public static int pedirOpcion(){
-            Scanner opcion = new Scanner(System.in);
-            System.out.println("Introduzca el número de la opción correspondiente a la operación que desea\n 1.-Suma\n 2.-Resta\n 3.-Multiplicación\n 4.-División");
-            return opcion.nextInt();
-        }
+
         //Funciones de operacion.
-        public static double suma (double num1, double num2){
-            return (num1+num2);
+        public static double operacion(int numeroAciertos, int numeroErrores, int numeroPreguntas) {
+            return (((numeroAciertos - (numeroErrores / 2)) * 10) / numeroPreguntas)+(0.5);
         }
-        public static double resta (double num1, double num2){
-            return (num1-num2);
+        public static void califica (String nota){
+            System.out.printf("La calificación del alumno es: \n%s\n", nota);
         }
-        public static double multiplicacion (double num1, double num2){
-            return (num1*num2);
-        }
-        public static double division (double num1, double num2){
-            return (num1/num2);
-        }
-        //Funciones de calculo.
-        public static void calculaSuma(double numero1, double numero2){
-            System.out.println(resultado()+(int)suma(numero1, numero2));
-        }
-        public static void calculaResta(double numero1, double numero2){
-            System.out.println(resultado()+(int)resta(numero1, numero2));
-        }
-        public static void calculaMulti(double numero1, double numero2){
-            System.out.println(resultado()+(int)multiplicacion(numero1, numero2));
-        }
-        public static void calculaDivi(double numero1, double numero2){
-            System.out.println(resultado()+(int)division(numero1, numero2));
-        }
-        //String para resultado.
-        public static String resultado(){
-            return "El resultado de la operación es ";
+        public static void introduce(String tipoPregunta, String sujeto) {
+            System.out.printf("Introduzca cantidad de %s del %s, por favor.\n", tipoPregunta ,sujeto);
         }
 
         public static void main(String[] args) {
-            double numero1 = pedirNumero();
-            double numero2 = pedirNumero();
-            switch (pedirOpcion()){
-                case 1:
-                    calculaSuma(numero1, numero2);
+            String nota ="";
+            final String aciertos = "aciertos";
+            final String errores = "errores";
+            final String preguntas = "preguntas";
+            final String alumno = "alumno";
+            final String examen = "examen";
+            introduce(aciertos, alumno);
+            int numAciertos = pedirNumero();
+            introduce(errores, alumno);
+            int numErrores = pedirNumero();
+            introduce(preguntas, examen);
+            int numPreguntas = pedirNumero();
+            int calificacion = (int) operacion(numAciertos, numErrores, numPreguntas);
+            if (calificacion >= 5) {
+                switch (calificacion){
+                    case 5:
+                        nota = "SUFICIENTE";
                     break;
-                case 2:
-                    calculaResta(numero1, numero2);
-                    break;
-                case 3:
-                    calculaMulti(numero1, numero2);
-                    break;
-                case 4:
-                    calculaDivi(numero1, numero2);
-                    break;
+                    case 6:
+                        nota= "BIEN";
+                        break;
+                    case 7:
+                        nota= "NOTABLE";
+                        break;
+                    case 8:
+                        nota= "NOTABLE";
+                        break;
+                    case 9:
+                        nota= "SOBRESALIENTE";
+                        break;
+                    case 10:
+                        nota= "SOBRESALIENTE";
+                        break;
+                }
+                califica(nota);
+            } else {
+                nota="INSUFICIENTE";
+                califica(nota);
             }
         }
     }
-
