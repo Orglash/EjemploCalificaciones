@@ -8,13 +8,11 @@ import java.util.Scanner;
             Scanner numero = new Scanner(System.in);
             return numero.nextInt();
         }
-
-        //Funciones de operacion.
-        public static double operacion(int numeroAciertos, int numeroErrores, int numeroPreguntas) {
-            return (((numeroAciertos - (numeroErrores / 2)) * 10) / numeroPreguntas)+(0.5);
+        public static int operacion(int numeroAciertos, int numeroErrores, int numeroPreguntas) {
+            return ((numeroAciertos - (numeroErrores / 2)) * 10) / numeroPreguntas;
         }
-        public static void califica (String nota){
-            System.out.printf("La calificación del alumno es: \n%s\n", nota);
+        public static void califica (int puntuacion, String nota){
+            System.out.printf("La puntuación ha sido de %d\nLa calificación del alumno es: \n%s\n", puntuacion, nota);
         }
         public static void introduce(String tipoPregunta, String sujeto) {
             System.out.printf("Introduzca cantidad de %s del %s, por favor.\n", tipoPregunta ,sujeto);
@@ -33,9 +31,9 @@ import java.util.Scanner;
             int numErrores = pedirNumero();
             introduce(preguntas, examen);
             int numPreguntas = pedirNumero();
-            int calificacion = (int) operacion(numAciertos, numErrores, numPreguntas);
-            if (calificacion >= 5) {
-                switch (calificacion){
+            int puntuacion = operacion(numAciertos, numErrores, numPreguntas);
+            if (puntuacion >= 5) {
+                switch (puntuacion){
                     case 5:
                         nota = "SUFICIENTE";
                     break;
@@ -55,10 +53,10 @@ import java.util.Scanner;
                         nota= "SOBRESALIENTE";
                         break;
                 }
-                califica(nota);
+                califica(puntuacion, nota);
             } else {
                 nota="INSUFICIENTE";
-                califica(nota);
+                califica(puntuacion, nota);
             }
         }
     }
