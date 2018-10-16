@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Scanner;
 
-public class EjemploCalificaciones {
+    public class EjemploCalificaciones {
         //Funcion pedirNumero: recogemos los valores por teclado.
         public static double pedirNumero() {
             Scanner numero = new Scanner(System.in);
